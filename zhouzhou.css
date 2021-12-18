@@ -1,0 +1,27 @@
+body {
+    display: flex;
+    /* 弹性盒子 */
+    justify-content: center;
+
+}
+
+
+
+
+
+
+.todolist-panel{
+    width: 20em;
+    min-height:25em;
+    border: 1px solid #bbb;
+    box-shadow:2px 2px 2px #bbb;
+}
+.input-pane{
+    padding: 5px 1em;
+    display: flex;
+
+}
+.input-pane > input {
+    flex:1 1 8em;
+    /* 放大,缩小，初始空间 */
+}
