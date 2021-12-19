@@ -6,10 +6,6 @@ body {
 }
 
 
-
-
-
-
 .todolist-panel{
     width: 20em;
     min-height:25em;
@@ -21,7 +17,37 @@ body {
     display: flex;
 
 }
+.list-pane{
+    padding: 5px 1em;
+}
 .input-pane > input {
     flex:1 1 8em;
     /* 放大,缩小，初始空间 */
+} 
+.list-pane>.todo-item{
+    display:flex;
+    margin:0.5em 0;
+}
+.list-pane>.todo-item>.title{
+    flex:1 1 8em;
+}
+.important-flag{
+    width:1.5em;
+    text-align:center;
+    border:1px solid #bbb;
+
+    color:#ccc;
+    font-size: 1em;
+    
+    font-weight: 900;
+    user-select: none;
+}
+.important-flag.open{
+    color:red
+}
+.input-pane #his-btn{
+
+}
+.input-pane #his-btn.open{
+    background-color: aqua;
 }
