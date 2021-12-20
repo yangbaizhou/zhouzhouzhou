@@ -18,6 +18,7 @@ let todoItems=[
     
     // }
 ];
+    
 let finishedItems=[];
 
 function renderTodoItemList(todoItems,finishedItems) {
@@ -33,6 +34,7 @@ function renderTodoItemList(todoItems,finishedItems) {
 
         let inputEl=document.createElement("input");
         inputEl.type="checkbox";
+        // 完成按钮
         inputEl.addEventListener("change",(e)=>{
             
             finishedItems.push(item);
@@ -45,10 +47,17 @@ function renderTodoItemList(todoItems,finishedItems) {
 
         let titleEl=document.createElement("div");
         titleEl.className="title";
+        titleEl.contentEditable="true"
+        titleEl.addEventListener("input",(e)=>{
+            todoItems[i].title=titleEl.innerText
+            console.log(todoItems)
+        })
+        // ssss
 
         let importanceEl=document.createElement("div");
         importanceEl.className="important-flag";
         importanceEl.innerText="*";
+    
 
         if(item.isImportance){
             importanceEl.classList.add("open");
@@ -65,7 +74,16 @@ function renderTodoItemList(todoItems,finishedItems) {
         });
 
         let deleteBtnEl=document.createElement("button");
-        deleteBtnEl.innerText="#";
+        deleteBtnEl.innerText="delete";
+        deleteBtnEl.addEventListener("click",(e)=>{
+            console.log("click",item);
+            todoItems.splice(i,1);
+            renderTodoItemList(todoItems,finishedItems);
+
+
+        })
+       
+
         titleEl.innerText=item.title;
 
         itemDiv.append(inputEl);
@@ -76,8 +94,25 @@ function renderTodoItemList(todoItems,finishedItems) {
         
         paneEl.append(itemDiv);
      
+        
+        // var input = document.getElementById("abc");
+        // input.addEventListener("keyup", function(event) {
+        //     event.preventDefault();
+        //     if (event.KeyboardEvent.keyCode===13) {
+        //         document.getElementById("add-btn").click();
+        //     }
+        // });
+        // 想用回车键代替add按钮，失败了
     }
 }
+// function keyHandler(e) {
+//     if(e.keyCode !==13||title.value.trim().length===0)return;
+//     list.todolist.push(title,value);
+//     title.value="";
+//     render()
+    
+// }失败x2
+
 function renderFinishedItemList(todoItems,finishedItems) {
     let paneEl=document.querySelector("#todolist>.list-pane");
     paneEl.innerHTML="";
@@ -93,6 +128,7 @@ function renderFinishedItemList(todoItems,finishedItems) {
 
         let titleEl=document.createElement("div");
         titleEl.className="title";
+        
 
         let importanceEl=document.createElement("div");
         importanceEl.className="important-flag";
@@ -102,6 +138,7 @@ function renderFinishedItemList(todoItems,finishedItems) {
         }
     
         titleEl.innerText=item.title;
+        
 
        
         itemDiv.append(titleEl);
@@ -110,6 +147,7 @@ function renderFinishedItemList(todoItems,finishedItems) {
         
         
         paneEl.append(itemDiv);
+        
      
     }
 }
@@ -122,6 +160,9 @@ function renderInputPane(todoItems){
 
     addBtnEL.addEventListener("click",(e)=>{
         let inputEl=inputpaneEl.querySelector("input");
+        if(inputEl.value==""){
+            alert("空白事项")
+        }else{
         todoItems.push({
         title:inputEl.value,
         isFinished:false,
@@ -130,6 +171,8 @@ function renderInputPane(todoItems){
     
 
         })
+        inputEl.value=""
+    }
         // 填值push
         // 看表单属性和方法
         console.log("add a item",inputEl.value);
@@ -154,6 +197,7 @@ function renderInputPane(todoItems){
     // let btnEl=document.querySelector("#todolist #add-btn");
 
 }
+
 
 renderInputPane(todoItems,finishedItems);
 renderTodoItemList(todoItems,finishedItems);
